@@ -1,0 +1,26 @@
+<h1>Task №<%= @task.id %></h1>
+
+<h4>Task Name: </h4>
+<%= @task.name %><hr>
+<h4>Description:</h4> 
+  <%= @task.description %><hr>
+<h4>Status: </h4>
+  <%= @task.status %><hr>
+<h4>Creator: </h4>
+  <%= @task.creator %><hr>
+<h4>Performer: </h4>
+  <%= @task.performer %><hr>
+<h4>Completed: </h4>
+  <%= @task.completed %><hr>
+
+<small><i><%= @task.created_at.in_time_zone('Moscow').strftime('%H:%M %d.%m.%Y')%> </i></small>
+
+<h3><%= link_to 'Edit task', edit_task_path(@task) %></h3>
+<h3><%= link_to 'Delete task', task_path(@task),
+    data: {
+      "turbo-method" => 'Delete',
+      "turbo-confirm" => 'Вы точно хотите удалить статью?'
+    }
+  %>
+</h3>
+
