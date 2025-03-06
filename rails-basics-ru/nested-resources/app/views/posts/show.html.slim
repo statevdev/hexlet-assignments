@@ -1,0 +1,27 @@
+- content_for :title do
+  = @post.title
+p
+  strong.me-2 Body:
+  = @post.body
+/ BEGIN
+h2 Комментарии
+
+- @post.post_comments.each do |comment|
+  .comment
+    p = comment.content
+    - if comment.persisted?
+      = link_to 'Редактировать', edit_post_comment_path(@post, comment)
+      = link_to 'Удалить', post_comment_path(@post, comment), data: { turbo_method: :delete, turbo_confirm: 'Вы уверены?' }
+
+h3 Добавить комментарий
+= form_with model: [@post, @post.post_comments.build], url: post_comments_path(@post), local: true do |f|
+  .field
+    = f.text_area :content
+  .actions
+    = f.submit 'Добавить'
+/ END
+hr
+
+.d-flex
+  = link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-primary me-2'
+  = link_to 'Back', :back, class: 'btn btn-outline-primary'

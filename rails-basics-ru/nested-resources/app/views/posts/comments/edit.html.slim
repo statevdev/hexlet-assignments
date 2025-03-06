@@ -1,0 +1,7 @@
+h1 Редактировать комментарий
+
+= form_with model: @comment, url: post_comment_path(@post, @comment), local: true do |f|
+  .field
+    = f.text_area :content
+  .actions
+    = f.submit 'Обновить'
